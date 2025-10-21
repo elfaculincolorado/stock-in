@@ -12,6 +12,7 @@ Route::middleware('api')->group(function () {
 });
 
 Route::post('/ventas', [VentaController::class, 'store']);
+Route::get('/ventas', [VentaController::class, 'index']);
 
 Route::get('/ventas', function (Request $request) {
     $inicio = $request->query('inicio');
