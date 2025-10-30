@@ -10,7 +10,7 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        return response()->json(Productos::all());
+        return response()->json(Producto::all());
     }
 
     public function store(Request $request)
@@ -21,22 +21,22 @@ class ProductoController extends Controller
             'minimo' => 'required|integer|min:0',
         ]);
 
-        $producto = Productos::create($request->all());
+        $producto = Producto::create($request->all());
         return response()->json($producto, 201);
     }
 
-    public function show(Productos $producto)
+    public function show(Producto $producto)
     {
         return response()->json($producto);
     }
 
-    public function update(Request $request, Productos $producto)
+    public function update(Request $request, Producto $producto)
     {
         $producto->update($request->all());
         return response()->json($producto);
     }
 
-    public function destroy(Productos $producto)
+    public function destroy(Producto $producto)
     {
         $producto->delete();
         return response()->json(null, 204);
@@ -44,7 +44,7 @@ class ProductoController extends Controller
 
     public function notificaciones()
     {
-        $productos = Productos::whereColumn('stock', '<=', 'minimo')->get();
+        $productos = Producto::whereColumn('stock', '<=', 'minimo')->get();
 
         $notificaciones = $productos->map(function ($p) {
             return [
